@@ -95,10 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "formatado.docx";
-            document.body.appendChild(a);
-            a.remove();
-            window.URL.revokeObjectURL(url);
+            a.download = "formatado.docx"; // Nome do ficheiro
+            document.body.appendChild(a); // Adiciona o link à página
+            
+            a.click(); // 1. CLICA NO LINK PARA INICIAR O DOWNLOAD
+            
+            a.remove(); // 2. Remove o link (agora já pode)
+            window.URL.revokeObjectURL(url); // 3. Liberta a memória do blob
             
         } catch (err) {
             console.error(err);

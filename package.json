@@ -5,10 +5,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
     "docx": "^9.0.1",
     "express": "^4.18.2",
     "formidable": "^3.5.1",
-    "mammoth": "*",
-    "cors": "^2.8.5"
+    "mammoth": "*"
   }
 }
