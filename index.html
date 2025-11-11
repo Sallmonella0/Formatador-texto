@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatador Automático ABNT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Definição das cores para o Tailwind (laranja e cinzas escuros)
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'orange-700': '#DD6B20',
+              'orange-600': '#F6AD55',
+              'orange-500': '#F6AD55',
+              'orange-400': '#FBD38D', // Laranja mais claro para texto
+              'gray-900': '#1A202C',  // Fundo principal
+              'gray-800': '#2D3748',  // Fundo do cartão
+              'gray-700': '#4A5568',  // Fundo de inputs/elementos
+              'gray-100': '#F7FAFC',  // Texto claro
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div id="app-container" class="flex flex-col items-center gap-6 p-8 border border-gray-700 rounded-3xl bg-gray-800 shadow-2xl max-w-lg w-full transition-shadow duration-300 hover:shadow-orange-700/50">
+
+        <h1 class="text-3xl font-extrabold text-orange-400 border-b-2 border-orange-700/50 pb-2 w-full text-center">
+            Formatador Automático
+        </h1>
+        <p class="text-center text-gray-400 text-sm mb-4">
+            Transforme seus documentos (.docx) para o padrão acadêmico <b>ABNT</b> ou <b>APA</b> em segundos.
+        </p>
+
+        <div class="w-full">
+            <label class="block text-xl font-bold text-gray-100 mb-3 flex items-center gap-2 border-b border-gray-700 pb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                1. Envie seu Arquivo
+            </label>
+            
+            <label id="upload-label" for="file-upload" class="flex items-center justify-center p-8 border-4 border-dashed border-gray-600 hover:border-orange-500 bg-gray-800 hover:bg-gray-700 rounded-xl transition duration-300 cursor-pointer shadow-inner hover:shadow-md">
+                <input id="file-upload" type="file" accept=".docx" class="hidden"/>
+                <div id="upload-info" class="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-10 w-10 text-orange-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    <p class="mt-1 text-sm text-gray-400 font-semibold">
+                        Clique para selecionar ou arraste e solte (.docx)
+                    </p>
+                </div>
+            </label>
+        </div>
+
+        <div class="w-full mt-4">
+            <label class="block text-xl font-bold text-gray-100 mb-3 flex items-center gap-2 border-b border-gray-700 pb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                2. Opções e Capa
+            </label>
+            
+            <div class="flex flex-col gap-2 items-start w-full max-w-lg mb-4">
+                <label class="text-gray-200 font-semibold">Escolha o Padrão:</label>
+                <div class="relative w-full"> 
+                    <select id="select-style" class="border border-gray-600 rounded-lg p-3 pr-10 w-full bg-gray-700 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition duration-150 appearance-none text-gray-200">
+                        <option value="abnt">ABNT (Brasil - Times New Roman 12, 1.5)</option>
+                        <option value="apa">APA (EUA - Arial 11, Duplo)</option>
+                        <option value="custom">Personalizado (Calibri 13, Duplo)</option>
+                    </select>
+                    <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 w-full max-w-lg bg-gray-700 p-4 rounded-xl border border-gray-600">
+                <p class="text-sm font-medium text-gray-400 mb-2">
+                    Preencha os campos abaixo para gerar a capa do seu trabalho.
+                </p>
+
+                <input id="input-title" type="text" placeholder="Título da Monografia / TCC" class="border border-gray-600 rounded-lg p-3 w-full focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition duration-150 text-gray-200 bg-gray-800"/>
+                <input id="input-author" type="text" placeholder="Nome do Autor" class="border border-gray-600 rounded-lg p-3 w-full focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition duration-150 text-gray-200 bg-gray-800"/>
+                <input id="input-institution" type="text" placeholder="Nome da Instituição (Ex: UFMG, USP)" class="border border-gray-600 rounded-lg p-3 w-full focus:ring-2 focus:ring-orange-500 focus:focus:border-orange-500 outline-none transition duration-150 text-gray-200 bg-gray-800"/>
+            </div>
+        </div>
+
+        <button id="format-button" disabled class="w-full bg-gradient-to-r from-orange-600 to-orange-700 text-white font-extrabold hover:from-orange-700 hover:to-orange-800 rounded-2xl py-3 mt-4 text-lg shadow-lg hover:shadow-xl transition duration-300 disabled:bg-gray-700 disabled:from-gray-700 disabled:to-gray-600 disabled:shadow-none disabled:cursor-not-allowed">
+            🚀 BAIXAR DOCUMENTO FORMATADO
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
